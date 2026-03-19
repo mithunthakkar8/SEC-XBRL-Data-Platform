@@ -1,0 +1,174 @@
+metric_patterns:
+  Revenue:
+    source: income_statement
+    patterns:
+      - Revenues
+  GAAP_Cost_of_Sales:
+    source: income_statement
+    patterns:
+      - DirectOperatingCosts
+  GAAP_Operating_Income:
+    source: income_statement
+    patterns:
+      - OperatingIncomeLoss
+  Depreciation_And_Amortization:
+    source: income_statement
+    patterns:
+      - CostDepreciationAmortizationAndDepletion
+  Interest_Expense:
+    source: income_statement
+    patterns:
+      - InterestIncomeExpenseNet
+  Profit_Before_Tax:
+    source: income_statement
+    patterns:
+      - IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments
+  Tax_Expense:
+    source: income_statement
+    patterns:
+      - IncomeTaxExpenseBenefit
+  GAAP_Net_Profit:
+    source: income_statement
+    patterns:
+      - ProfitLoss
+  Net_Profit_Bottom_Line:
+    source: income_statement
+    patterns:
+      - NetIncomeLoss
+      - NetIncomeLossAvailableToCommonStockholdersBasic
+  Diluted_EPS:
+    source: income_statement
+    patterns:
+      - EarningsPerShareDiluted
+      - IncomeLossFromContinuingOperationsPerDilutedShare
+  Weighted_Average_Outstanding_Shares:
+    source: income_statement
+    patterns:
+      - WeightedAverageNumberOfShareOutstandingBasicAndDiluted
+      - WeightedAverageNumberOfDilutedSharesOutstanding
+  # Cash_And_Cash_Equivalents:
+  #   source: balance_sheet
+  #   patterns:
+  #     - CashAndCashEquivalentsAtCarryingValue
+  # Trade_Accounts_Receivable:
+  #   source: balance_sheet
+  #   patterns:
+  #     - AccountsReceivableNetCurrent
+  # Inventories:
+  #   source: balance_sheet
+  #   patterns:
+  #     - InventoryNet
+  # Current_Assets:
+  #   source: balance_sheet
+  #   patterns:
+  #     - AssetsCurrent
+  # Property_and_Mine_Development:
+  #   source: balance_sheet
+  #   patterns:
+  #     - PropertyPlantAndEquipmentNet
+  # Ore_Stockpiles_on_Leach_Pads:
+  #   source: balance_sheet
+  #   patterns:
+  #     - InventoryOreStockpilesOnLeachPads
+  #     - LeachableMaterial
+  # Accounts_Payable:
+  #   source: balance_sheet
+  #   patterns:
+  #     - AccountsPayableCurrent
+  # Current_Liabilities:
+  #   source: balance_sheet
+  #   patterns:
+  #     - LiabilitiesCurrent
+  # Current_Portion_of_Long_Term_Debt:
+  #   source: balance_sheet
+  #   patterns:
+  #     - LongTermDebtCurrent
+  # Long_Term_Debt:
+  #   source: balance_sheet
+  #   patterns:
+  #     - LongTermDebtNoncurrent
+  # Lease_Liabilities:
+  #   source: balance_sheet
+  #   patterns:
+  #     - OperatingLeaseLiabilityNoncurrent
+  # Additional_Paid_In_Capital:
+  #   source: balance_sheet
+  #   patterns:
+  #     - AdditionalPaidInCapitalCommonStock
+  #     - AdditionalPaidInCapital
+  # Retained_Earnings:
+  #   source: balance_sheet
+  #   patterns:
+  #     - RetainedEarningsAccumulatedDeficit
+  # Treasury_Stock:
+  #   source: balance_sheet
+  #   patterns:
+  #     - TreasuryStockValue
+  # Shareholders_Equity:
+  #   source: balance_sheet
+  #   patterns:
+  #     - StockholdersEquity
+  # Total_Equity:
+  #   source: balance_sheet
+  #   patterns:
+  #     - StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest
+  # Total_Assets:
+  #   source: balance_sheet
+  #   patterns:
+  #     - Assets
+  # CFO:
+  #   source: cash_flow
+  #   patterns:
+  #     - NetCashProvidedByUsedInOperatingActivities
+  #     - NetCashProvidedByUsedInOperatingActivitiesContinuingOperations
+  # Capex:
+  #   source: cash_flow
+  #   patterns:
+  #     - PaymentsToAcquirePropertyPlantAndEquipment
+  # Repayment_of_Debt:
+  #   source: cash_flow
+  #   patterns:
+  #     - RepaymentsOfLongTermDebt
+  # Cash_Dividends:
+  #   source: cash_flow
+  #   patterns:
+  #     - PaymentsOfDividendsCommonStock
+
+fallback_patterns:
+  Revenue: []
+  GAAP_Cost_of_Sales: []
+  GAAP_Operating_Income: []
+  Depreciation_And_Amortization: []
+  Interest_Expense: []
+  Profit_Before_Tax: []
+  Tax_Expense: []
+  GAAP_Net_Profit:
+    - NetIncomeLoss
+    - NetIncomeLossAvailableToCommonStockholdersBasic
+  Net_Profit_Bottom_Line:
+    - NetIncomeLossAvailableToCommonStockholdersBasic
+  Diluted_EPS:
+    - EarningsPerShareBasicAndDiluted
+  Weighted_Average_Outstanding_Shares: []
+  # Cash_And_Cash_Equivalents: []
+  # Trade_Accounts_Receivable: []
+  # Inventories: []
+  # Current_Assets: []
+  # Property_and_Mine_Development: []
+  # Ore_Stockpiles_on_Leach_Pads:
+  #   - OtherInventoryNoncurrent
+  # Accounts_Payable: []
+  # Current_Liabilities: []
+  # Current_Portion_of_Long_Term_Debt: []
+  # Long_Term_Debt: []
+  # Lease_Liabilities: []
+  # Additional_Paid_In_Capital: []
+  # Retained_Earnings: []
+  # Treasury_Stock: []
+  # Shareholders_Equity: []
+  # Total_Equity: []
+  # Total_Assets: []
+  # CFO: []
+  # Capex: []
+  # Repayment_of_Debt: []
+  # Cash_Dividends: []

@@ -1,0 +1,37 @@
+xbrl_directory: "C:/Users/mithu/Documents/MEGA/Projects/Financial_Data_Analytics_Pipeline/downloads/2023-09-30/"
+use_latest_xbrl: False  # If false, provide xbrl_file
+xbrl_file: "C:/Users/mithu/Documents/MEGA/Projects/Financial_Data_Analytics_Pipeline/downloads/2023-09-30/instance.xml"
+
+target_year: 2023
+target_quarter: 3  # Set 1 for Q1, 2 for Q2, etc. Leave empty for full-year data.
+
+financial_metrics:
+  Revenues:
+    primary: ["RevenueFromContractWithCustomerExcludingAssessedTax"]
+    fallback: []
+    period_type: "duration"
+    
+  NetIncome:
+    primary: ["NetIncomeLoss"]
+    fallback: ["ProfitLoss", "ComprehensiveIncomeNetOfTax"]
+    period_type: "duration"
+
+  OperatingIncome:
+    primary: ["OperatingIncomeLoss"]
+    fallback: ["IncomeFromOperations"]
+    period_type: "duration"
+
+  Assets:
+    primary: ["Assets"]
+    fallback: ["TotalAssets"]
+    period_type: "end_of_period"
+
+  Liabilities:
+    primary: ["Liabilities"]
+    fallback: ["TotalLiabilities"]
+    period_type: "end_of_period"
+
+  Equity:
+    primary: ["StockholdersEquity"]
+    fallback: ["TotalStockholdersEquity"]
+    period_type: "end_of_period"

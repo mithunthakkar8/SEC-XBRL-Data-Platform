@@ -1,0 +1,32 @@
+ticker: "SCCO"
+
+YEARS: 
+  - 2025
+  - 2024
+  # - 2023
+  # - 2022
+  # - 2021
+  # - 2020
+  # - 2019
+  # - 2018
+  # - 2017
+  # - 2016
+  # - 2015
+  # - 2014
+  # - 2013
+  # - 2012
+  # - 2011
+  # - 2010
+  # - 2009
+  
+
+
+FORMS:
+  - "10-K"
+  - "10-Q"
+
+email: "mithun.thakkar8@gmail.com"
+
+metrics_path: "C:\\Users\\mithu\\Documents\\MEGA\\Projects\\Financial_Data_Analytics_Pipeline\\Edgar_Data_Extractor\\Metrics Config Files\\metrics_config_SCCO.yaml"
+
+

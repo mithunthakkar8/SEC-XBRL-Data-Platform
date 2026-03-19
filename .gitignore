@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+venv.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+
+# Data / models (adjust based on your project)
+data/
+filings/
+pgvector/
+*.csv
+*.parquet
+*.pkl
+*.pt
+*.h5
+
+# Logs
+*.log
