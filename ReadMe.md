@@ -4,12 +4,13 @@
 
 ## 📌 Overview
 
-This project implements an **end-to-end ETL pipeline** for extracting, transforming, and loading SEC XBRL financial filings into a PostgreSQL data warehouse. It includes:
+This project implements an **end-to-end ETL pipeline** for extracting, transforming, and loading SEC XBRL financial filings into a PostgreSQL data warehouse and generates analytics in Power BI. It includes:
 
 - Automated scraping of SEC EDGAR  
 - XBRL parsing using Arelle  
 - Data enrichment (LEI, Yahoo Finance, SEC API)  
-- Analytical views for financial statements  
+- Analytical views for financial statements
+- Power BI Period over period changes in statement numbers
 
 ---
 
