@@ -189,3 +189,60 @@ bibtex
   version = {1.0.0},
   year = {2026}
 }
+
+
+
+
+⚠️ Important Notes
+Issue	Recommendation
+Hardcoded credentials	Replace with environment variables or secrets manager
+SEC rate limits	Scraper enforces 8-9 requests/second; do not modify
+Arelle version	Tested with Arelle 2.0+
+PostgreSQL extensions	Requires uuid-ossp and pldbgapi
+📧 Contact
+For questions, collaborations, or access inquiries:
+
+[Your Email]
+
+Disclaimer: This software is for academic and research purposes. Users are responsible for complying with SEC's terms of service and rate limiting policies.
+
+text
+
+---
+
+## Next Steps for This Repository
+
+| Action | Status | Time |
+|--------|--------|------|
+| Add LICENSE file (GPLv3) | 🔴 Do now | 2 min |
+| Add CITATION.cff | 🔴 Do now | 2 min |
+| Replace hardcoded passwords with env vars | 🔴 Critical | 5 min |
+| Create Zenodo DOI | 🔴 Recommended | 5 min |
+| Add README (above) | 🔴 Do now | 2 min |
+| Make repository public (if desired) | ⏳ After cleanup | - |
+
+---
+
+## Critical Security Warning
+
+**Your code contains hardcoded database passwords in multiple files:**
+
+- `Impute_Vector_Embeddings.py` → `pass@123`
+- `main.py` → `pass@123`
+- `SEC_ETL_Pipeline.py` → `pass@123`
+- `XBRLToPostgresLoader.py` → `pass@123`
+- `Validation_Class.py` → `postgres`
+
+**Before making this repository public, you must:**
+
+1. Replace all hardcoded credentials with environment variables
+2. Or use a `.env` file (add to `.gitignore`)
+3. Or use a secrets manager
+
+**Example fix:**
+
+```python
+import os
+db_config = {
+    'password': os.environ.get('DB_PASSWORD', 'default_for_local_dev'),
+}
