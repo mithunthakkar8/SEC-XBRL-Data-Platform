@@ -86,8 +86,8 @@ PostgreSQL >= 13 (with uuid-ossp extension)
 Installation
 bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://github.com/mithunthakkar8/SEC-XBRL-Data-Platform
+cd SEC-XBRL-Data-Platform
 
 # Install Python dependencies
 pip install arelle psycopg2-binary httpx lxml pycountry yahooquery sentence-transformers
