@@ -6,7 +6,7 @@ authors:
   - family-names: "Thakkar"
     given-names: "Mithun"
     orcid: "https://orcid.org/0009-0008-1209-8566"
-repository-code: "https://github.com/YOUR_USERNAME/YOUR_REPO_NAME"
+repository-code: "https://github.com/mithunthakkar8/SEC-XBRL-Data-Warehousing"
 license: "GPL-3.0"
 version: "1.0.0"
 date-released: 2026-04-26
