@@ -31,20 +31,19 @@ This project implements an **end-to-end ETL pipeline** for extracting, transform
 ## 📊 Data Warehouse Schema
 
 The pipeline populates the following schema structure:
-xbrl.industry_classification → GICS/SIC/NAICS industry hierarchy
-xbrl.company → Core company metadata (LEI, ticker, country)
-xbrl.filing → SEC filing metadata (accession number, dates)
-xbrl.context_period → Duration or instant contexts
-xbrl.context → Contexts with period references
-xbrl.dimension_declaration → Segment/scenario dimensions
-xbrl.dimension_member → Dimension members
-xbrl.concept → XBRL concepts from taxonomy
-xbrl.label → Standard/verbose labels, documentation
-xbrl.concept_attribute → Period type, balance type, data type
-xbrl.reported_fact → Fact values (numeric, string, boolean, date)
-xbrl.concept_relationship → Parent-child relationships (presentation)
 
-
+- `xbrl.industry_classification` → GICS/SIC/NAICS industry hierarchy
+- `xbrl.company` → Core company metadata (LEI, ticker, country)
+- `xbrl.filing` → SEC filing metadata (accession number, dates)
+- `xbrl.context_period` → Duration or instant contexts
+- `xbrl.context` → Contexts with period references
+- `xbrl.dimension_declaration` → Segment/scenario dimensions
+- `xbrl.dimension_member` → Dimension members
+- `xbrl.concept` → XBRL concepts from taxonomy
+- `xbrl.label` → Standard/verbose labels, documentation
+- `xbrl.concept_attribute` → Period type, balance type, data type
+- `xbrl.reported_fact` → Fact values (numeric, string, boolean, date)
+- `xbrl.concept_relationship` → Parent-child relationships (presentation)
 
 ## 🔄 Pipeline Architecture
 SEC EDGAR
@@ -74,6 +73,7 @@ Financial Statement Views (SQL functions)
 ├── create_balance_sheet_view()
 └── create_cash_flow_statement_view()
 
+text
 
 ## 🚀 Getting Started
 
@@ -105,7 +105,7 @@ from XBRLToPostgresLoader import XBRLToPostgresLoader
 db_config = {
     'dbname': 'finhub',
     'user': 'finhub_admin',
-    'password': 'your_password_here',
+    'password': 'your_password_here',  # Use environment variable in production
     'host': 'localhost',
     'port': '5432'
 }
@@ -127,7 +127,7 @@ from SECFilingPipeline import SECFilingPipeline
 config = {
     'cik': '0001001838',
     'base_save_dir': 'filings',
-    'db_config': {...},
+    'db_config': db_config,
     'years': {2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025},
     'count': 100
 }
@@ -145,7 +145,7 @@ SELECT company.create_balance_sheet_view('FCX', 'NYQ', debug := true);
 -- Cash Flow Statement (normalized unpivoted)
 SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
 📁 Project Structure
-
+text
 ├── SECScraper.py                 # SEC EDGAR scraping with rate limiting
 ├── XBRLToPostgresLoader.py       # Core ETL loader (Arelle + PostgreSQL)
 ├── SECFilingPipeline.py          # Orchestrates scraping + loading
@@ -156,9 +156,9 @@ SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
 │   ├── 106-112. Business views   # Financial statement functions
 │   └── company/                  # Concept mapping tables
 🔐 Environment Security
-Critical: The code contains hardcoded database credentials (pass@123). Before publishing:
+Critical: The code previously contained hardcoded database credentials. Before production deployment:
 
-Remove or replace with environment variables
+Replace with environment variables
 
 Never commit real credentials
 
@@ -183,15 +183,11 @@ bibtex
 @software{Thakkar_SEC_XBRL_Data_Warehousing_2026,
   author = {Mithun Thakkar},
   title = {SEC XBRL Data Warehousing Pipeline},
-  url = {https://github.com/YOUR_USERNAME/YOUR_REPO_NAME},
-  doi = {10.5281/zenodo.YOUR-DOI},
+  url = {https://github.com/mithunthakkar8/SEC-XBRL-Data-Platform},
+  doi = {10.5281/zenodo.19773629},
   version = {1.0.0},
   year = {2026}
 }
-
-
-
-
 ⚠️ Important Notes
 Issue	Recommendation
 Hardcoded credentials	Replace with environment variables or secrets manager
