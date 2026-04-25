@@ -4,115 +4,116 @@
 
 ## 📌 Overview
 
-This project implements an **end-to-end ETL pipeline** for extracting, transforming, and loading SEC XBRL financial filings into a PostgreSQL data warehouse. It includes automated scraping of SEC EDGAR, XBRL parsing using the Arelle toolkit, enrichment with external data sources (LEI, Yahoo Finance, SEC API), and analytical views for financial statement generation.
+This project implements an **end-to-end ETL pipeline** for extracting, transforming, and loading SEC XBRL financial filings into a PostgreSQL data warehouse. It includes:
+
+- Automated scraping of SEC EDGAR  
+- XBRL parsing using Arelle  
+- Data enrichment (LEI, Yahoo Finance, SEC API)  
+- Analytical views for financial statements  
+
+---
 
 ## 🚀 Key Features
 
 | Feature | Description |
-|---------|-------------|
-| **Automated SEC Scraping** | Rate-limited scraping of 10-K, 10-Q filings with retry logic and jitter |
-| **XBRL Parsing** | Full taxonomy loading, fact extraction, context preservation, relationship mapping |
-| **Data Enrichment** | LEI lookup (GLEIF API), ticker resolution (SEC API), company metadata (Yahoo Finance) |
-| **PostgreSQL Data Warehouse** | Normalized schema with industry classifications, company metadata, filings, contexts, facts, and concept relationships |
-| **Financial Statement Views** | Dynamic pivot views for Income Statement, Balance Sheet, and Cash Flow Statement |
-| **Segment/Scenario Support** | Handles dimensional contexts for segment reporting |
+|--------|------------|
+| **Automated SEC Scraping** | Rate-limited scraping of 10-K, 10-Q filings with retry logic |
+| **XBRL Parsing** | Full taxonomy loading, fact extraction, context preservation |
+| **Data Enrichment** | LEI (GLEIF), ticker (SEC API), metadata (Yahoo Finance) |
+| **PostgreSQL Warehouse** | Normalized schema for filings, facts, relationships |
+| **Financial Statement Views** | Dynamic pivot views (IS, BS, CF) |
+| **Segment Support** | Handles dimensional contexts |
+
+---
 
 ## 🛠️ Tech Stack
 
 | Category | Technologies |
-|----------|--------------|
-| **Languages** | Python 3, PL/pgSQL, SQL |
-| **XBRL Processing** | Arelle toolkit |
-| **Web Scraping** | httpx, lxml, requests |
-| **Database** | PostgreSQL (uuid-ossp, pg_stat_activity) |
-| **External APIs** | GLEIF (LEI), SEC EDGAR, Yahoo Finance (yahooquery) |
-| **Vector Embeddings** | Sentence Transformers (all-MiniLM-L6-v2) |
+|----------|-------------|
+| Languages | Python, SQL, PL/pgSQL |
+| XBRL | Arelle |
+| Scraping | httpx, lxml, requests |
+| Database | PostgreSQL |
+| APIs | GLEIF, SEC EDGAR, Yahoo Finance |
+| Embeddings | Sentence Transformers |
+
+---
 
 ## 📊 Data Warehouse Schema
 
-The pipeline populates the following schema structure:
+- `xbrl.industry_classification`
+- `xbrl.company`
+- `xbrl.filing`
+- `xbrl.context_period`
+- `xbrl.context`
+- `xbrl.dimension_declaration`
+- `xbrl.dimension_member`
+- `xbrl.concept`
+- `xbrl.label`
+- `xbrl.concept_attribute`
+- `xbrl.reported_fact`
+- `xbrl.concept_relationship`
 
-- `xbrl.industry_classification` → GICS/SIC/NAICS industry hierarchy
-- `xbrl.company` → Core company metadata (LEI, ticker, country)
-- `xbrl.filing` → SEC filing metadata (accession number, dates)
-- `xbrl.context_period` → Duration or instant contexts
-- `xbrl.context` → Contexts with period references
-- `xbrl.dimension_declaration` → Segment/scenario dimensions
-- `xbrl.dimension_member` → Dimension members
-- `xbrl.concept` → XBRL concepts from taxonomy
-- `xbrl.label` → Standard/verbose labels, documentation
-- `xbrl.concept_attribute` → Period type, balance type, data type
-- `xbrl.reported_fact` → Fact values (numeric, string, boolean, date)
-- `xbrl.concept_relationship` → Parent-child relationships (presentation)
+---
 
 ## 🔄 Pipeline Architecture
+
+```text
 SEC EDGAR
-│
-▼
-SECScraper.py (rate-limited HTTP)
-│
-▼
-Raw filings (.txt submission + .xml instance)
-│
-▼
-XBRLToPostgresLoader.py (Arelle + enrichment)
-│
-├── load_metadata() → xbrl.company, xbrl.filing
-├── load_xbrl_file() → XBRL model loading
-├── load_concepts_batch() → xbrl.concept, label, attribute
-├── load_contexts_batch() → xbrl.context, context_period, dimensions
-├── _process_standard_facts() → xbrl.reported_fact
-└── process_xbrl_relationships() → xbrl.concept_relationship
-│
-▼
+   │
+   ▼
+SECScraper.py
+   │
+   ▼
+Raw filings (.txt + .xml)
+   │
+   ▼
+XBRLToPostgresLoader.py
+   ├── load_metadata()
+   ├── load_xbrl_file()
+   ├── load_concepts_batch()
+   ├── load_contexts_batch()
+   ├── _process_standard_facts()
+   └── process_xbrl_relationships()
+   │
+   ▼
 PostgreSQL Data Warehouse
-│
-▼
-Financial Statement Views (SQL functions)
-├── create_income_statement_view()
-├── create_balance_sheet_view()
-└── create_cash_flow_statement_view()
+   │
+   ▼
+Financial Statement Views
+   │
+   ▼
+Power BI
 
-text
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-```bash
+🚀 Getting Started
+Prerequisites
 Python >= 3.8
 PostgreSQL >= 13 (with uuid-ossp extension)
 Installation
-bash
-# Clone the repository
 git clone https://github.com/mithunthakkar8/SEC-XBRL-Data-Platform
 cd SEC-XBRL-Data-Platform
 
-# Install Python dependencies
 pip install arelle psycopg2-binary httpx lxml pycountry yahooquery sentence-transformers
 Database Setup
-sql
--- Run setup scripts in order
 \i '101. Create Database.sql'
 \i '102. Create Role.sql'
 \i '103. Access and Privileges.sql'
 \i '104. Schema Setup.sql'
 \i '105. XBRL Schema Table Definitions.sql'
-Usage Example
-python
+🧪 Usage Example
 from XBRLToPostgresLoader import XBRLToPostgresLoader
 
 db_config = {
     'dbname': 'finhub',
     'user': 'finhub_admin',
-    'password': 'your_password_here',  # Use environment variable in production
+    'password': 'your_password_here',
     'host': 'localhost',
     'port': '5432'
 }
 
 loader = XBRLToPostgresLoader(db_config=db_config)
 
-# Load a single filing
 instance_file = "path/to/filing.xml"
 submission_file = "path/to/submission.txt"
 
@@ -120,8 +121,7 @@ if loader.load_xbrl_file(instance_file):
     company_id = loader.load_metadata(submission_file)
     fact_count = loader._process_standard_facts(company_id=company_id)
     print(f"Processed {fact_count} facts")
-Running the Full Pipeline
-python
+🔄 Running Full Pipeline
 from SECFilingPipeline import SECFilingPipeline
 
 config = {
@@ -133,70 +133,50 @@ config = {
 }
 
 pipeline = SECFilingPipeline(**config)
-pipeline.run_pipeline()  # Scrapes → discovers → processes all filings for the CIK
-Generating Financial Statement Views
-sql
--- Income Statement (pivoted)
+pipeline.run_pipeline()
+📊 Financial Statement Views
 SELECT company.create_income_statement_view('FCX', 'NYQ', debug := true);
-
--- Balance Sheet (pivoted)
 SELECT company.create_balance_sheet_view('FCX', 'NYQ', debug := true);
-
--- Cash Flow Statement (normalized unpivoted)
 SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
 📁 Project Structure
-text
-├── SECScraper.py                 # SEC EDGAR scraping with rate limiting
-├── XBRLToPostgresLoader.py       # Core ETL loader (Arelle + PostgreSQL)
-├── SECFilingPipeline.py          # Orchestrates scraping + loading
-├── Helper_Functions.py           # LEI, ISO codes, ticker lookup, Yahoo enrichment
-├── Validation_Class.py           # Legacy XBRL processor (deprecated features)
+├── SECScraper.py
+├── XBRLToPostgresLoader.py
+├── SECFilingPipeline.py
+├── Helper_Functions.py
+├── Validation_Class.py
 ├── sql/
-│   ├── 101-105. Core setup       # Database, role, schema, tables
-│   ├── 106-112. Business views   # Financial statement functions
-│   └── company/                  # Concept mapping tables
-🔐 Environment Security
-Critical: The code previously contained hardcoded database credentials. Before production deployment:
+│   ├── 101-105. Core setup
+│   ├── 106-112. Business views
+│   └── company/
+🔐 Security
 
-Replace with environment variables
+⚠️ Important
 
-Never commit real credentials
-
-Example fix:
-
-python
+Remove hardcoded credentials
+Use environment variables
+Never commit secrets
 import os
+
 db_config = {
-    'password': os.environ.get('DB_PASSWORD'),
-    # ...
+    'password': os.environ.get('DB_PASSWORD')
 }
 📄 License
-This project is licensed under the GNU General Public License v3.0.
-See the LICENSE file for details.
+
+GNU General Public License v3.0
 
 📝 Citation
-If you use this software in your research or production environment, please cite:
-
-Mithun Thakkar, "SEC XBRL Data Warehousing Pipeline", Zenodo, 2026
-
-bibtex
 @software{Thakkar_SEC_XBRL_Data_Warehousing_2026,
   author = {Mithun Thakkar},
   title = {SEC XBRL Data Warehousing Pipeline},
-  url = {https://github.com/mithunthakkar8/SEC-XBRL-Data-Platform},
   doi = {10.5281/zenodo.19773629},
-  version = {1.0.0},
   year = {2026}
 }
 ⚠️ Important Notes
 Issue	Recommendation
-Hardcoded credentials	Replace with environment variables or secrets manager
-SEC rate limits	Scraper enforces 8-9 requests/second; do not modify
-Arelle version	Tested with Arelle 2.0+
-PostgreSQL extensions	Requires uuid-ossp and pldbgapi
+Credentials	Use env variables
+SEC limits	Keep 8–9 req/sec
+Arelle	Use v2.0+
+PostgreSQL	Requires uuid-ossp
 📧 Contact
-For questions, collaborations, or access inquiries:
 
 mithun.thakkar8@gmail.com
-
-Disclaimer: This software is for academic and research purposes. Users are responsible for complying with SEC's terms of service and rate limiting policies.
