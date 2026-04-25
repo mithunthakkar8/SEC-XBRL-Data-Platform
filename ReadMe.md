@@ -44,7 +44,7 @@ xbrl.concept_attribute → Period type, balance type, data type
 xbrl.reported_fact → Fact values (numeric, string, boolean, date)
 xbrl.concept_relationship → Parent-child relationships (presentation)
 
-text
+
 
 ## 🔄 Pipeline Architecture
 SEC EDGAR
@@ -74,7 +74,6 @@ Financial Statement Views (SQL functions)
 ├── create_balance_sheet_view()
 └── create_cash_flow_statement_view()
 
-text
 
 ## 🚀 Getting Started
 
@@ -106,7 +105,7 @@ from XBRLToPostgresLoader import XBRLToPostgresLoader
 db_config = {
     'dbname': 'finhub',
     'user': 'finhub_admin',
-    'password': 'pass@123',
+    'password': 'your_password_here',
     'host': 'localhost',
     'port': '5432'
 }
@@ -146,7 +145,7 @@ SELECT company.create_balance_sheet_view('FCX', 'NYQ', debug := true);
 -- Cash Flow Statement (normalized unpivoted)
 SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
 📁 Project Structure
-text
+
 ├── SECScraper.py                 # SEC EDGAR scraping with rate limiting
 ├── XBRLToPostgresLoader.py       # Core ETL loader (Arelle + PostgreSQL)
 ├── SECFilingPipeline.py          # Orchestrates scraping + loading
