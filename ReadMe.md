@@ -1,6 +1,6 @@
 # SEC XBRL Data Warehousing Pipeline
 
-[![DOI](https://zenodo.org/badge/DOI/YOUR-DOI-HERE.svg)](https://doi.org/YOUR-DOI-HERE)
+[![DOI](https://zenodo.org/badge/DOI/YOUR-DOI-HERE.svg)](https://doi.org/10.5281/zenodo.19773629)
 
 ## 📌 Overview
 
