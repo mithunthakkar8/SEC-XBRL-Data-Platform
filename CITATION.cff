@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "SEC XBRL Data Warehousing Pipeline"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "Thakkar"
+    given-names: "Mithun"
+    orcid: "https://orcid.org/0009-0008-1209-8566"
+repository-code: "https://github.com/YOUR_USERNAME/YOUR_REPO_NAME"
+license: "GPL-3.0"
+version: "1.0.0"
+date-released: 2026-04-26
+description: "End-to-end ETL pipeline for extracting, transforming, and loading SEC XBRL financial filings into a PostgreSQL data warehouse with automated scraping, XBRL parsing, and financial statement generation."
+keywords:
+  - xbrl
+  - sec-filings
+  - etl-pipeline
+  - data-warehouse
+  - postgresql
+  - financial-data
+  - python
