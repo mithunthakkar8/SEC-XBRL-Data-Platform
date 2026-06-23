@@ -36,7 +36,7 @@ This project implements an **end-to-end ETL pipeline** for extracting, transform
 | Scraping | httpx, lxml, requests |
 | Database | PostgreSQL |
 | APIs | GLEIF, SEC EDGAR, Yahoo Finance |
-| Embeddings | Sentence Transformers |
+
 
 ---
 
