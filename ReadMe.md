@@ -85,24 +85,35 @@ Financial Statement Views
    │
    ▼
 Power BI
+```
 
+---
 
-🚀 Getting Started
-Prerequisites
-Python >= 3.8
-PostgreSQL >= 13 (with uuid-ossp extension)
-Installation
+## 🚀 Getting Started
+
+### Prerequisites
+- Python >= 3.8
+- PostgreSQL >= 13 (with uuid-ossp extension)
+
+### Installation
+```bash
 git clone https://github.com/mithunthakkar8/SEC-XBRL-Data-Platform
 cd SEC-XBRL-Data-Platform
 
 pip install arelle psycopg2-binary httpx lxml pycountry yahooquery sentence-transformers
-Database Setup
+```
+
+### Database Setup
+```sql
 \i '101. Create Database.sql'
 \i '102. Create Role.sql'
 \i '103. Access and Privileges.sql'
 \i '104. Schema Setup.sql'
 \i '105. XBRL Schema Table Definitions.sql'
-🧪 Usage Example
+```
+
+## 🧪 Usage Example
+```python
 from XBRLToPostgresLoader import XBRLToPostgresLoader
 
 db_config = {
@@ -122,7 +133,10 @@ if loader.load_xbrl_file(instance_file):
     company_id = loader.load_metadata(submission_file)
     fact_count = loader._process_standard_facts(company_id=company_id)
     print(f"Processed {fact_count} facts")
-🔄 Running Full Pipeline
+```
+
+## 🔄 Running Full Pipeline
+```python
 from SECFilingPipeline import SECFilingPipeline
 
 config = {
@@ -135,11 +149,36 @@ config = {
 
 pipeline = SECFilingPipeline(**config)
 pipeline.run_pipeline()
-📊 Financial Statement Views
+```
+
+## 📊 Financial Statement Views
+```sql
 SELECT company.create_income_statement_view('FCX', 'NYQ', debug := true);
 SELECT company.create_balance_sheet_view('FCX', 'NYQ', debug := true);
 SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
-📁 Project Structure
+```
+
+---
+
+## 📈 Power BI Analytics
+
+Period-over-period analysis of financial statement figures, built on top of the PostgreSQL warehouse views above. Screenshots of each statement view are below; the full interactive `.pbix` report is available for download.
+
+**Income Statement**
+![Income Statement Power BI view](<./Power BI/IS.jpg>)
+
+**Balance Sheet**
+![Balance Sheet Power BI view](<./Power BI/BS.jpg>)
+
+**Cash Flow Statement**
+![Cash Flow Statement Power BI view](<./Power BI/CF.jpg>)
+
+📥 [Download the interactive Power BI report (.pbix)](<./Power BI/SCCO.pbix>) — open in [Power BI Desktop](https://www.microsoft.com/en-us/power-platform/products/power-bi/downloads) to explore the live, interactive version with full drill-down and filtering.
+
+---
+
+## 📁 Project Structure
+```
 ├── SECScraper.py
 ├── XBRLToPostgresLoader.py
 ├── SECFilingPipeline.py
@@ -149,35 +188,47 @@ SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
 │   ├── 101-105. Core setup
 │   ├── 106-112. Business views
 │   └── company/
-🔐 Security
+```
 
-⚠️ Important
+## 🔐 Security
 
-Remove hardcoded credentials
-Use environment variables
-Never commit secrets
+⚠️ **Important**
+- Remove hardcoded credentials
+- Use environment variables
+- Never commit secrets
+
+```python
 import os
 
 db_config = {
     'password': os.environ.get('DB_PASSWORD')
 }
-📄 License
+```
+
+## 📄 License
 
 GNU General Public License v3.0
 
-📝 Citation
+## 📝 Citation
+```bibtex
 @software{Thakkar_SEC_XBRL_Data_Warehousing_2026,
   author = {Mithun Thakkar},
   title = {SEC XBRL Data Warehousing Pipeline},
   doi = {10.5281/zenodo.19773629},
   year = {2026}
 }
-⚠️ Important Notes
-Issue	Recommendation
-Credentials	Use env variables
-SEC limits	Keep 8–9 req/sec
-Arelle	Use v2.0+
-PostgreSQL	Requires uuid-ossp
-📧 Contact
+```
+
+## ⚠️ Important Notes
+
+| Issue | Recommendation |
+|---|---|
+| Credentials | Use env variables |
+| SEC limits | Keep 8–9 req/sec |
+| Arelle | Use v2.0+ |
+| PostgreSQL | Requires uuid-ossp |
+
+## 📧 Contact
 
 mithun.thakkar8@gmail.com
+
