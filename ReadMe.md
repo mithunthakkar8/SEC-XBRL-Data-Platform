@@ -91,7 +91,7 @@ Power BI
 ---
 ## 📈 Power BI Analytics
 
-Period-over-period analysis of financial statement figures, built on top of the PostgreSQL warehouse views above. Screenshots of each statement view are below; the full interactive `.pbix` report is available for download.
+Period-over-period analysis of financial statement figures, built on top of the PostgreSQL warehouse views. Screenshots of each statement view are below; the full interactive `.pbix` report is available for download.
 
 **Income Statement**
 ![Income Statement Power BI view](./Edgar_Data_Extractor/Power_BI/IS.jpg)
