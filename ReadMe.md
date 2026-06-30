@@ -87,8 +87,26 @@ Financial Statement Views
 Power BI
 ```
 
+
+---
+## 📈 Power BI Analytics
+
+Period-over-period analysis of financial statement figures, built on top of the PostgreSQL warehouse views above. Screenshots of each statement view are below; the full interactive `.pbix` report is available for download.
+
+**Income Statement**
+![Income Statement Power BI view](./Power_BI/IS.jpg)
+
+**Balance Sheet**
+![Balance Sheet Power BI view](./Power_BI/BS.jpg)
+
+**Cash Flow Statement**
+![Cash Flow Statement Power BI view](./Power_BI/CF.jpg)
+
+📥 [Download the interactive Power BI report (.pbix)](./Power_BI/SCCO.pbix) — open in [Power BI Desktop](https://www.microsoft.com/en-us/power-platform/products/power-bi/downloads) to explore the live, interactive version with full drill-down and filtering.
+
 ---
 
+---
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -157,25 +175,6 @@ SELECT company.create_income_statement_view('FCX', 'NYQ', debug := true);
 SELECT company.create_balance_sheet_view('FCX', 'NYQ', debug := true);
 SELECT company.create_cash_flow_statement_view_UP('FCX', 'NYQ', debug := true);
 ```
-
----
-
-## 📈 Power BI Analytics
-
-Period-over-period analysis of financial statement figures, built on top of the PostgreSQL warehouse views above. Screenshots of each statement view are below; the full interactive `.pbix` report is available for download.
-
-**Income Statement**
-![Income Statement Power BI view](<./Power_BI/IS.jpg>)
-
-**Balance Sheet**
-![Balance Sheet Power BI view](<./Power_BI/BS.jpg>)
-
-**Cash Flow Statement**
-![Cash Flow Statement Power BI view](<./Power_BI/CF.jpg>)
-
-📥 [Download the interactive Power BI report (.pbix)](<./Power_BI/SCCO.pbix>) — open in [Power BI Desktop](https://www.microsoft.com/en-us/power-platform/products/power-bi/downloads) to explore the live, interactive version with full drill-down and filtering.
-
----
 
 ## 📁 Project Structure
 ```
