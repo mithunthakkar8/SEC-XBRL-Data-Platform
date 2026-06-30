@@ -94,15 +94,15 @@ Power BI
 Period-over-period analysis of financial statement figures, built on top of the PostgreSQL warehouse views above. Screenshots of each statement view are below; the full interactive `.pbix` report is available for download.
 
 **Income Statement**
-![Income Statement Power BI view](./Power_BI/IS.jpg)
+![Income Statement Power BI view](./Edgar_Data_Extractor/Power_BI/IS.jpg)
 
 **Balance Sheet**
-![Balance Sheet Power BI view](./Power_BI/BS.jpg)
+![Balance Sheet Power BI view](./Edgar_Data_Extractor/Power_BI/BS.jpg)
 
 **Cash Flow Statement**
-![Cash Flow Statement Power BI view](./Power_BI/CF.jpg)
+![Cash Flow Statement Power BI view](./Edgar_Data_Extractor/Power_BI/CF.jpg)
 
-📥 [Download the interactive Power BI report (.pbix)](./Power_BI/SCCO.pbix) — open in [Power BI Desktop](https://www.microsoft.com/en-us/power-platform/products/power-bi/downloads) to explore the live, interactive version with full drill-down and filtering.
+📥 [Download the interactive Power BI report (.pbix)](./Edgar_Data_Extractor/Power_BI/SCCO.pbix) — open in [Power BI Desktop](https://www.microsoft.com/en-us/power-platform/products/power-bi/downloads) to explore the live, interactive version with full drill-down and filtering.
 
 ---
 
